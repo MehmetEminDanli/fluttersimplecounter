@@ -1,136 +1,53 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    return _UygulamamState();
+  }
+}
+
+class _UygulamamState extends State {
+  int _sayac = 0;
+//sayaç tasarım başlangıç
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: ' Sayaç Uygulaması',
-        
-        theme: ThemeData(
-          primarySwatch: Colors.red,
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Sayaç Ödev asaffurkan 9194"),
         ),
-       
-        home: MyHomePage(title: 'Flutter Sayaç Uygulaması'));
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-   double fontsize=100;
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
-
-  void _resetCounter() {
-    setState(() {
-      _counter = 0;
-     
-    });
-  }
-
-  void artifont(){
-   setState(() {
-     fontsize+=5;
-   });
- }
-
-  void eksifont(){
-    setState(() {
-      fontsize-=5;
-    });
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-     Color textColor = (_counter < 0) ? Colors.red : Colors.green;
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          IconButton(
-            onPressed: artifont,
-            icon: Icon(Icons.add),
-          ),
-          IconButton(
-            onPressed: eksifont,
-            icon: Icon(Icons.remove),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Sayaç:',
-             
-              style: TextStyle(fontSize: fontsize), 
-            ),
-            Text(
-              '$_counter',
-              style: TextStyle(fontSize: 64, fontWeight: FontWeight.bold,color: textColor),
-           
-            ),
-          ],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => sayaciArttir(),
+          child: const Icon(Icons.add),
         ),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton(
-            onPressed: _decrementCounter,
-            tooltip: 'Azalt',
-            child: Icon(Icons.remove),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Sayaç",
+                style: TextStyle(fontSize: 24),
+              ),
+              Text(_sayac.toString(), style: const TextStyle(fontSize: 24))
+            ],
           ),
-          SizedBox(width: 20),
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Artır',
-            child: Icon(Icons.add),
-          ),
-          SizedBox(width: 20),
-          FloatingActionButton(
-            onPressed: _resetCounter,
-            tooltip: 'Sıfırla',
-            child: Icon(Icons.refresh),
-          ),SizedBox(width: 20),
-        
-        ],
+        ),
       ),
     );
   }
+//sayaç tasarım bitiş
+
+//sayaç arttırma
+  void sayaciArttir() {
+    setState(() {
+      _sayac++;
+    });
+  }
 }
-
-
-
-
-
